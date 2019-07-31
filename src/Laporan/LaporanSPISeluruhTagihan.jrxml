@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d15b7312-7006-4208-8ea8-c98ef21e16d2">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT tb_siswa.nis,tb_siswa.nm_siswa,tb_kelas.nama_kelas,tb_gol_spi.nominal_spi,sum(tb_transspi.bayar),tb_gol_spi.nominal_spi-sum(tb_transspi.bayar) FROM tb_siswa,tb_kelas,tb_gol_spi,tb_transspi WHERE tb_siswa.id_kelas=tb_kelas.id_kelas AND tb_siswa.nis=tb_transspi.nis AND tb_gol_spi.id_gol_spi=tb_siswa.id_gol_spi group by tb_transspi.nis]]>
+	</queryString>
+	<field name="nis" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nm_siswa" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nama_kelas" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nominal_spi" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="sum(tb_transspi.bayar)" class="java.math.BigDecimal"/>
+	<field name="tb_gol_spi.nominal_spi-sum(tb_transspi.bayar)" class="java.math.BigDecimal"/>
+	<variable name="Jumlah_sisa_spi" class="java.lang.Integer" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{tb_gol_spi.nominal_spi-sum(tb_transspi.bayar)}]]></variableExpression>
+	</variable>
+	<variable name="Jumlah_spi" class="java.lang.Integer" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{nominal_spi}]]></variableExpression>
+	</variable>
+	<variable name="Jumlah_bayar_spi" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{nominal_spi}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="146" y="0" width="308" height="31" uuid="61cbebf2-459c-4ffe-a11b-b5ce8d8c8828"/>
+				<textElement textAlignment="Center">
+					<font size="24"/>
+				</textElement>
+				<text><![CDATA[SMK Islam Bojong]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="146" y="47" width="308" height="20" uuid="2750e475-2d50-4de2-b4ef-e4bb6c24a528"/>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Jalan Karangsari, Bojong, Pekalongan]]></text>
+			</staticText>
+			<image hAlign="Center" vAlign="Middle">
+				<reportElement x="12" y="0" width="122" height="74" uuid="214d68ae-c91a-4577-b400-6cd0ec034dd0"/>
+				<imageExpression><![CDATA["C:\\Users\\dimas\\Documents\\NetBeansProjects\\Pembayaran Sekolah SMK Islam Bojong\\src\\Icon\\smkijo.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="4" width="555" height="31" uuid="835b99f3-c6e5-4b2d-8507-547af0f8e48d"/>
+				<textElement textAlignment="Center">
+					<font size="16"/>
+				</textElement>
+				<text><![CDATA[Laporan tagihan SPI]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="41" width="79" height="20" uuid="afde8b3e-1a17-4cc2-a0b7-43a2123d5182"/>
+				<box>
+					<pen lineWidth="1.25"/>
+					<topPen lineWidth="1.25"/>
+					<leftPen lineWidth="1.25"/>
+					<bottomPen lineWidth="1.25"/>
+					<rightPen lineWidth="1.25"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[NIS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="81" y="41" width="100" height="20" uuid="5b1e5c33-2ac8-4f56-b254-dffc9d588e6e"/>
+				<box>
+					<pen lineWidth="1.25"/>
+					<topPen lineWidth="1.25"/>
+					<leftPen lineWidth="1.25"/>
+					<bottomPen lineWidth="1.25"/>
+					<rightPen lineWidth="1.25"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Nama Siswa]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="181" y="41" width="70" height="20" uuid="7362ef7e-d50b-42ca-8009-316d17cc0e54"/>
+				<box>
+					<pen lineWidth="1.25"/>
+					<topPen lineWidth="1.25"/>
+					<leftPen lineWidth="1.25"/>
+					<bottomPen lineWidth="1.25"/>
+					<rightPen lineWidth="1.25"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Kelas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="251" y="41" width="100" height="20" uuid="e63ee477-b2ff-49d0-926d-a6d2fbaeff70"/>
+				<box>
+					<pen lineWidth="1.25"/>
+					<topPen lineWidth="1.25"/>
+					<leftPen lineWidth="1.25"/>
+					<bottomPen lineWidth="1.25"/>
+					<rightPen lineWidth="1.25"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[SPI]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="352" y="41" width="101" height="20" uuid="bd9b1923-078c-499f-8dff-57d696cb715a"/>
+				<box>
+					<pen lineWidth="1.25"/>
+					<topPen lineWidth="1.25"/>
+					<leftPen lineWidth="1.25"/>
+					<bottomPen lineWidth="1.25"/>
+					<rightPen lineWidth="1.25"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Bayar SPI]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="453" y="41" width="100" height="20" uuid="eb9f8161-37cb-46fe-af6b-9f0bf6a2435b"/>
+				<box>
+					<pen lineWidth="1.25"/>
+					<topPen lineWidth="1.25"/>
+					<leftPen lineWidth="1.25"/>
+					<bottomPen lineWidth="1.25"/>
+					<rightPen lineWidth="1.25"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Sisa SPI]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="79" height="20" uuid="399805bf-ee79-4eb6-9135-7a3278162238"/>
+				<textFieldExpression><![CDATA[$F{nis}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="251" y="0" width="100" height="20" uuid="ea1aa8d5-958e-4c78-8724-e3084ded795c"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{nominal_spi}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="351" y="0" width="100" height="20" uuid="fb1b6c42-a9b6-4731-a422-d0589e3a35b2"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{sum(tb_transspi.bayar)}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="453" y="0" width="100" height="20" uuid="69fea63d-890e-4726-937c-c275696c7e4a"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{tb_gol_spi.nominal_spi-sum(tb_transspi.bayar)}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="81" y="0" width="100" height="20" uuid="36c14d38-173f-4942-a243-caad18ca204e"/>
+				<textFieldExpression><![CDATA[$F{nm_siswa}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="182" y="1" width="69" height="20" uuid="57d77447-84aa-4cc0-8909-ffd8bf644bfe"/>
+				<textFieldExpression><![CDATA[$F{nama_kelas}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="250" splitType="Stretch">
+			<textField pattern="#,##0.00">
+				<reportElement x="454" y="44" width="100" height="20" uuid="361852bc-a001-4858-9173-93a1789f9cb3"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{Jumlah_sisa_spi}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="452" y="25" width="100" height="20" uuid="0db06d2f-ab13-409b-9ac9-c8f2114684e8"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Total Sisa SPI]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="351" y="25" width="100" height="20" uuid="c9f910bc-df1c-478c-a535-10c3e3c4a9e4"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Total Bayar SPI]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="251" y="25" width="100" height="20" uuid="c636c73d-48d4-410e-9f97-137e539b99f9"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Total SPI]]></text>
+			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement x="352" y="44" width="100" height="20" uuid="21d6c04b-9ec4-4328-a7f9-f78f50cb7965"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{Jumlah_bayar_spi}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="252" y="44" width="100" height="20" uuid="6b41093d-d776-40e8-a19a-0704aefd13e0"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{Jumlah_spi}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="360" y="214" width="88" height="20" uuid="0e8efc8d-5a7b-4cb7-a0e2-efe5eb7285ff"/>
+				<text><![CDATA[Kepala Sekolah]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="360" y="202" width="113" height="20" uuid="53c051e8-8852-4e8c-a1e8-e7d146c6473b"/>
+				<textElement>
+					<font isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Hj. Nur Azizah, A.Md]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="360" y="144" width="64" height="20" uuid="25af6528-16fe-4ee7-814f-3ea038bb48b4"/>
+				<text><![CDATA[Mengetahui ,]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="360" y="124" width="80" height="20" uuid="197ef6ca-6754-4c6f-96f2-d0ab54651fb5"/>
+				<text><![CDATA[Pekalongan]]></text>
+			</staticText>
+			<textField pattern="dd MMMMM yyyy">
+				<reportElement x="440" y="124" width="100" height="20" uuid="cc68a3a8-5df8-4c2b-b97c-35c1e82f21c2"/>
+				<textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>
